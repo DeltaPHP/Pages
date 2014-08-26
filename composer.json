@@ -1,5 +1,5 @@
 {
-    "name": "deltaphp/deltapages",
+    "name": "deltaphp/pages",
     "description": "DeltaPagesModule",
     "license": "GPL-3+",
     "authors": [
@@ -9,6 +9,12 @@
         }
     ],
     "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "Pages": "src/"
+        }
+    },
+
     "require": {
         "deltaphp/deltacore": "dev-master"
     }

@@ -3,13 +3,9 @@
  * User: Vasiliy Shvakin (orbisnull) zen4dev@gmail.com
  */
 
-namespace DeltaPages;
+namespace Pages;
 
 
 class Module
 {
-    public static function init()
-    {
-
-    }
 } 
