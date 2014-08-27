@@ -5,7 +5,7 @@
     <div>
         {% for item in items %}
             <div>
-                <h2>{{ item.title }} <sup>{{ item.id }}</sup></h2>
+                <h2>{{ item.title }} <sup>({{ item.name }})</sup></h2>
 
                 <p>{{ item.text|striptags|raw|cutStr(500) }}...</p>
 
