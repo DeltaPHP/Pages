@@ -2,7 +2,7 @@
 
 return [
     ["/pages", ["index", "list"]],
-    ["reg::/pages/([a-zA-Z0-9]+)$", ["index", "view"]],
+    ["reg::~^/pages/([a-zA-Z0-9]+)$~", ["index", "view"]],
 
     ["/admin/pages", ["admin", "list"]],
     ["/admin/pages/add", ["admin", "form"]],

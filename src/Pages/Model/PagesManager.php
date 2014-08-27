@@ -12,7 +12,7 @@ class PagesManager extends Repository
 {
     protected $metaInfo = [
         'pages' => [
-            'class'  => '\\DeltaPages\\Model\\Page',
+            'class'  => '\\Pages\\Model\\Page',
             'id'     => 'id',
             'fields' => [
                 "id",

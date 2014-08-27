@@ -1,0 +1,16 @@
+{% extends "layout.twig" %}
+
+{% block head %}
+    <link rel="stylesheet" href="static/css/page.css">
+{% endblock head %}
+
+{% block article %}
+    <div class="page-header">
+        <h1>{{ item.title }}</h1>
+    </div>
+    <div>
+        <div class="page-text">
+            {{ item.text|raw }}
+        </div>
+    </div>
+{% endblock article %}
