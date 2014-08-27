@@ -6,10 +6,10 @@
 namespace Pages\Model;
 
 
-use DeltaCore\Prototype\BaseEntityObject;
+use DeltaCore\Prototype\MiddleObject;
 use DeltaDb\EntityInterface;
 
-class Page extends BaseEntityObject implements EntityInterface
+class Page extends MiddleObject implements EntityInterface
 {
     protected $title;
     protected $text;
