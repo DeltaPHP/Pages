@@ -6,6 +6,7 @@
 namespace Pages\Controller;
 
 use DeltaCore\AbstractController;
+use DeltaRouter\Exception\NotFoundException;
 use Pages\Model\Parts\PagesManager;
 
 class IndexController extends AbstractController
@@ -26,8 +27,8 @@ class IndexController extends AbstractController
 
         $manager = $this->getPagesManager();
         $item = $manager->findOne(["name" => $name]);
-        if(!$name) {
-            $this->getResponse()->redirect("/");
+        if(!$item) {
+            throw new NotFoundException("Page $name not found");
         }
         $this->getView()->assign("item", $item);
         $this->getView()->assign("pageTitle", "{$item->getTitle()}" );
