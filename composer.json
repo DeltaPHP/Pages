@@ -1,21 +1,22 @@
 {
     "name": "deltaphp/pages",
     "description": "DeltaPagesModule",
-    "license": "GPL-3+",
+    "license": "GPL-3",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "orbisnull",
             "email": "zen4dev@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
             "Pages": "src/"
         }
     },
-
     "require": {
-        "deltaphp/deltacore": "dev-master"
+        "deltaphp/deltacore": "^2.0",
+        "deltaphp/deltadb": "^1.2.0"
     }
 }
