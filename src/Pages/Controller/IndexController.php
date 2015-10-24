@@ -13,26 +13,21 @@ class IndexController extends AbstractController
 {
     use PagesManager;
 
-    public function getNameInUri()
+    public function viewAction($params)
     {
-        return $this->getRequest()->getUriPartByNum(2);
-    }
-
-    public function viewAction()
-    {
-        $name = $this->getNameInUri();
-        if(!$name) {
+        if (!isset($params["name"])) {
             $this->getResponse()->redirect("/");
         }
 
+        $name = $params["name"];
         $manager = $this->getPagesManager();
         $item = $manager->findOne(["name" => $name]);
-        if(!$item) {
+        if (!$item) {
             throw new NotFoundException("Page $name not found");
         }
         $this->getView()->assign("item", $item);
-        $this->getView()->assign("pageTitle", "{$item->getTitle()}" );
-        $this->getView()->assign("pageDescription", "{$item->getDescription()}" );
+        $this->getView()->assign("pageTitle", "{$item->getTitle()}");
+        $this->getView()->assign("pageDescription", "{$item->getDescription()}");
     }
 
 } 
