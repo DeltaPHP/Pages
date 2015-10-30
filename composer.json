@@ -1,22 +1,24 @@
 {
-    "name": "deltaphp/pages",
-    "description": "DeltaPagesModule",
-    "license": "LGPL-3.0",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "authors": [
-        {
-            "name": "orbisnull",
-            "email": "zen4dev@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-0": {
-            "Pages": "src/"
-        }
-    },
-    "require": {
-        "deltaphp/deltacore": "^2.0",
-        "deltaphp/deltadb": "^1.2.0"
+  "name": "deltaphp/pages",
+  "description": "DeltaPagesModule",
+  "license": "LGPL-3.0",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "orbisnull",
+      "email": "zen4dev@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-0": {
+      "Pages": "src/"
+    }
+  },
+  "require": {
+    "deltaphp/deltacore": "^2.0",
+    "deltaphp/deltadb": "^1.2.0",
+    "fxp/composer-asset-plugin": "~1.0",
+    "bower-asset/ckeditor": "^4.5.4"
+  }
 }

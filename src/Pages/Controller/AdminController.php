@@ -10,10 +10,6 @@ use DeltaCore\AdminControllerInterface;
 
 class AdminController extends IndexController implements AdminControllerInterface
 {
-    public function getId()
-    {
-        return $this->getRequest()->getUriPartByNum(4);
-    }
 
     public function listAction()
     {
@@ -30,10 +26,10 @@ class AdminController extends IndexController implements AdminControllerInterfac
         $this->getView()->assign("pageTitle", "Страницы сайта {$titleEnd}" );
     }
 
-    public function formAction()
+    public function formAction(array $params = [])
     {
-        $id = $this->getId();
-        if (!empty($id)) {
+        if (isset($params["id"])) {
+            $id = $params["id"];
             $nm = $this->getPagesManager();
             $item = $nm->findById($id);
             if (!$item) {
@@ -60,7 +56,7 @@ class AdminController extends IndexController implements AdminControllerInterfac
         $this->getResponse()->redirect("/admin/pages");
     }
 
-    public function rmAction()
+    public function rmAction(array $params = [])
     {
         $this->autoRenderOff();
         $id = $this->getId();
