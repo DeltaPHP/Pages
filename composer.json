@@ -18,7 +18,13 @@
   "require": {
     "deltaphp/deltacore": "^2.0",
     "deltaphp/deltadb": "^1.2.0",
-    "fxp/composer-asset-plugin": "~1.0",
     "bower-asset/ckeditor": "^4.5.4"
+  },
+  "extra": {
+    "asset-installer-paths": {
+      "npm-asset-library": "public/assets/vendor",
+      "bower-asset-library": "public/assets/vendor"
+    }
   }
+
 }
