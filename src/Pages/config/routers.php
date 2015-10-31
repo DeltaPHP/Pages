@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "page_view" =>
+    "pages_view" =>
         [
             "methods" => [\DeltaRouter\Route::METHOD_GET],
             "patterns" => [
@@ -10,9 +10,9 @@ return [
             ],
             "action" => ["index", "view"],
         ],
-    ["/admin/pages", ["admin", "list"]],
-    ["/admin/pages/add", ["admin", "form"]],
-    "page_edit" =>
+    "pages_list" => ["/admin/pages", ["admin", "list"]],
+    "pages_add" => ["/admin/pages/add", ["admin", "form"]],
+    "pages_edit" =>
         [
             "methods" => [\DeltaRouter\Route::METHOD_GET],
             "patterns" => [
@@ -21,7 +21,7 @@ return [
             ],
             "action" => ["admin", "form"],
         ],
-    "page_save" =>
+    "pages_save" =>
         [
             "methods" => [\DeltaRouter\Route::METHOD_POST],
             "patterns" => [
@@ -29,7 +29,7 @@ return [
             ],
             "action" => ["admin", "save"],
         ],
-    "page_delete" =>
+    "pages_rm" =>
         [
             "methods" => [\DeltaRouter\Route::METHOD_GET],
             "patterns" => [

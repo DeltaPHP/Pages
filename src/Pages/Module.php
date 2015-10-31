@@ -8,4 +8,4 @@ namespace Pages;
 
 class Module
 {
-} 
+}

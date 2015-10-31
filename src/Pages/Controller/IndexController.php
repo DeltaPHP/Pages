@@ -30,4 +30,4 @@ class IndexController extends AbstractController
         $this->getView()->assign("pageDescription", "{$item->getDescription()}");
     }
 
-} 
+}

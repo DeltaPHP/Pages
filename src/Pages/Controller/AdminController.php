@@ -53,7 +53,7 @@ class AdminController extends IndexController implements AdminControllerInterfac
         }
         $manager->load($item, $requestParams);
         $manager->save($item);
-        $this->getResponse()->redirect("/admin/pages");
+        $this->getResponse()->redirect($this->getRouteUrl("pages_list"));
     }
 
     public function rmAction(array $params = [])
@@ -61,8 +61,8 @@ class AdminController extends IndexController implements AdminControllerInterfac
         $this->autoRenderOff();
         $id = $this->getId();
         $this->getPagesManager()->deleteById($id);
-        $this->getResponse()->redirect("/admin/pages");
+        $this->getResponse()->redirect($this->getRouteUrl("pages_list"));
     }
 
 
-} 
+}

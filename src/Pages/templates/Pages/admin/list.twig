@@ -9,8 +9,10 @@
 
                 <p>{{ item.text|striptags|raw|cutStr(500) }}...</p>
 
-                <a href="/admin/pages/edit/{{ item.id }}" class="btn btn-sm btn-warning"><span class="glyphicon glyphicon-edit"></span></a>
-                <a href="/admin/pages/rm/{{ item.id }}" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+                <a href="{{ route_url('pages_edit', {'id': item.id}) }}" class="btn btn-sm btn-warning"><span
+                            class="glyphicon glyphicon-edit"></span></a>
+                <a href="{{ route_url('pages_rm', {'id': item.id}) }}" class="btn btn-sm btn-danger"><span
+                            class="glyphicon glyphicon-remove"></span></a>
             </div>
             <br/>
         {% endfor %}
@@ -22,7 +24,8 @@
                     <li><a href="/admin/articles">&laquo;</a></li>
                 {% endif %}
                 {% for page in pages %}
-                    <li class="{% if page.active %}active{% endif %}"><a href="/admin/articles?p={{ page.id }}">{{ page.id }}</a></li>
+                    <li class="{% if page.active %}active{% endif %}"><a
+                                href="/admin/articles?p={{ page.id }}">{{ page.id }}</a></li>
                 {% endfor %}
                 {% if showLastPage %}
                     <li><a href="/admin/articles?p={{ countPages }}">&raquo;</a></li>
@@ -30,5 +33,6 @@
             </ul>
         </div>
     </div>
-    <a href="/admin/pages/add" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file"></span> Add New</a>
+    <a href="{{ route_url('pages_add') }}" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-file"></span>
+        Add New</a>
 {% endblock %}

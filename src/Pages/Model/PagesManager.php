@@ -11,19 +11,15 @@ use DeltaDb\Repository;
 class PagesManager extends Repository
 {
     protected $metaInfo = [
-        'pages' => [
-            'class'  => '\\Pages\\Model\\Page',
-            'id'     => 'id',
-            'fields' => [
-                "id",
-                "name",
-                "title",
-                "description",
-                "text",
-                "created",
-                "changed",
-            ]
+        'fields' => [
+            "id",
+            "name",
+            "title",
+            "description",
+            "text",
+            "created",
+            "changed",
         ]
     ];
 
-} 
+}

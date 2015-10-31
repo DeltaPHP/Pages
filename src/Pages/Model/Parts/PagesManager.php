@@ -14,4 +14,4 @@ trait PagesManager
     {
         return $this->getApplication()["pagesManager"];
     }
-} 
+}

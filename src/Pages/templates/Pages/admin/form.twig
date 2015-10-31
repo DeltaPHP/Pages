@@ -1,11 +1,17 @@
 {% extends "layoutAdmin.twig" %}
 
 {% block head %}
-    {% include "ckeditor.twig" %}
+    {{ parent() }}
+    {{ asset_js(["ckeditor/ckeditor.js"], default, true) }}
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace( '.ckeditor' );
+        });
+    </script>
 {% endblock head %}
 
 {% block content %}
-    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="/admin/pages/save">
+    <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route_url("pages_save") }}">
         <fieldset>
             {% if item.id %}
                 <input name="id" type="hidden" value="{{ item.id }}"/>
