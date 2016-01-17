@@ -5,11 +5,18 @@
 
 namespace Pages\Controller;
 
+use Attach\Model\Parts\AttachSave;
 use Pages\Model\Page;
 use DeltaCore\AdminControllerInterface;
 
 class AdminController extends IndexController implements AdminControllerInterface
 {
+    use AttachSave;
+
+    public function getFileManager()
+    {
+        return $this->getPagesManager()->getFileManager();
+    }
 
     public function listAction()
     {
@@ -23,7 +30,7 @@ class AdminController extends IndexController implements AdminControllerInterfac
         $this->getView()->assignArray($pageInfo);
         $this->getView()->assign("countItems", $countItems);
         $titleEnd = $pageInfo["page"] == 1 ? "" : " страница " . $pageInfo["page"];
-        $this->getView()->assign("pageTitle", "Страницы сайта {$titleEnd}" );
+        $this->getView()->assign("pageTitle", "Страницы сайта {$titleEnd}");
     }
 
     public function formAction(array $params = [])
@@ -53,6 +60,10 @@ class AdminController extends IndexController implements AdminControllerInterfac
         }
         $manager->load($item, $requestParams);
         $manager->save($item);
+
+        $maxFileSize = $this->getConfig(["Pages", "Attach", "Size"], 500 * 1024);
+        $this->processFilesRequest($item, $maxFileSize);
+
         $this->getResponse()->redirect($this->getRouteUrl("pages_list"));
     }
 

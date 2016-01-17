@@ -9,6 +9,14 @@
 
                 <p>{{ item.text|striptags|raw|cutStr(500) }}...</p>
 
+                <div class="photos">
+                    {% for image in item.images %}
+                        <a class='images photo-thumb' href="{{ image.uri("origin") }}" title="{{ image.name }} - {{ image.description }}">
+                            <img src="{{ image.uri("thumb") }}" title="{{ image.name }}" alt="{{ image.description }}"/>
+                        </a>
+                    {% endfor %}
+                </div>
+
                 <a href="{{ route_url('pages_edit', {'id': item.id}) }}" class="btn btn-sm btn-warning"><span
                             class="glyphicon glyphicon-edit"></span></a>
                 <a href="{{ route_url('pages_rm', {'id': item.id}) }}" class="btn btn-sm btn-danger"><span

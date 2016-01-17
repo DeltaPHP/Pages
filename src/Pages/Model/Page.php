@@ -6,11 +6,20 @@
 namespace Pages\Model;
 
 
+use Attach\Model\Parts\GetImagesTrait;
 use DeltaCore\Prototype\MiddleObject;
 use DeltaDb\EntityInterface;
 
+/**
+ * Class Page
+ * @package Pages
+ * @method  setFileManager(\Attach\Model\FileManager $fileManager)
+ * @method \Attach\Model\FileManager getFileManager()
+ */
 class Page extends MiddleObject implements EntityInterface
 {
+    use GetImagesTrait;
+
     protected $title;
     protected $text;
 

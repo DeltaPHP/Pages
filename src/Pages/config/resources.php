@@ -4,7 +4,10 @@
  */
 return [
     "pagesManager" => function ($c) {
-            $manager = new \Pages\Model\PagesManager();
-            return $manager;
+        $manager = new \Pages\Model\PagesManager();
+        $fm = $c["fileManager"];
+        $manager->setFileManager($fm);
+        return $manager;
     },
+
 ];

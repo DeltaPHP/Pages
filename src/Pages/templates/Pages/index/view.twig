@@ -9,4 +9,18 @@
             {{ item.text|raw }}
         </div>
     </div>
+    {% if item.images %}
+        <div class="pages-photos">
+            <div class="list">
+                {% for image in item.images %}
+                    <div class="thumbnail">
+                        <a class="photo-thumb" href="{{ image.uri("origin") }}">
+                            <img src="{{ image.uri("medium") }}"/>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    {% endif %}
 {% endblock content %}
