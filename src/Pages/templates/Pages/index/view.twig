@@ -24,3 +24,8 @@
         <div class="clearfix"></div>
     {% endif %}
 {% endblock content %}
+
+{% block head %}
+    {{ parent() }}
+    {% include "colorbox.twig" %}
+{% endblock head %}
