@@ -1,5 +1,10 @@
 {% extends "layoutAdmin.twig" %}
 
+{% block head %}
+    {{ parent() }}
+    {%  include "colorbox.twig" %}
+{% endblock head %}
+
 {% block content %}
     <h1>Страницы ({{ countItems }})</h1>
     <div>
