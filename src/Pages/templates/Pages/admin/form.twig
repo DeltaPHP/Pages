@@ -8,18 +8,21 @@
 {% block content %}
     <form class="form-horizontal" method="POST" enctype="multipart/form-data" action="{{ route_url("pages_save") }}">
         <fieldset>
-            {% if item.id %}
-                <input name="id" type="hidden" value="{{ item.id }}"/>
+            {% if (item.id or id) %}
+                <input name="id" type="hidden" value="{{ (item.id ?: id)|dechex }}"/>
+                <script language="JavaScript">
+                    window.itemId = "{{ (item.id ?: id)|dechex }}";
+                </script>
             {% endif %}
 
             <!-- Form Name -->
-            <legend>{{ item ? "Edit" : "Add" }} Page {{ item.id ? "#" }}{{ item.id }}</legend>
+            <legend>{{ item ? "Edit" : "Add" }} Page {{ item.id ? "#" }}{{ item.id|dechex }}</legend>
 
             <div class="form-group">
-                <label class="col-md-4 control-label" for="name">Name</label>
+                <label class="col-md-4 control-label" for="url">Url</label>
                 <div class="col-md-8">
-                    <input id="name" name="name" type="text" placeholder="Name" class="form-control input-md"
-                           required="" value="{{ item.name }}">
+                    <input id="url" name="url" type="text" placeholder="Url" class="form-control input-md"
+                           required="" value="{{ item.url }}">
                 </div>
             </div>
 
@@ -43,10 +46,10 @@
 
             <!-- Textarea -->
             <div class="form-group">
-                <label class="col-md-5 control-label" for="text">Text</label>
+                <label class="col-md-5 control-label" for="content">Text</label>
 
                 <div class="col-md-12">
-                    <textarea class="form-control ckeditor" id="text" name="text" rows="60">{{ item.text }}</textarea>
+                    <textarea class="form-control ckeditor" id="content" name="content" rows="60">{{ item.content }}</textarea>
                 </div>
             </div>
 

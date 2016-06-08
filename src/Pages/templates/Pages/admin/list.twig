@@ -2,33 +2,41 @@
 
 {% block head %}
     {{ parent() }}
-    {%  include "colorbox.twig" %}
+    {% include "colorbox.twig" %}
 {% endblock head %}
 
 {% block content %}
     <h1>Страницы ({{ countItems }})</h1>
     <div>
-        {% for item in items %}
-            <div>
-                <h2>{{ item.title }} <sup>({{ item.name }})</sup></h2>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>url</th>
+                <th>title</th>
+                <th>created</th>
+                <th>changed</th>
+                <th>active</th>
+                <th>actions</th>
+            </tr>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.id|dechex }}</td>
+                    <td>{{ item.url }}</td>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.created|date("d.m.Y") }}</td>
+                    <td>{{ item.changed|date("d.m.Y") }}</td>
+                    <td>{{ item.active }}</td>
+                    <td>
+                        <a href="{{ route_url('pages_edit', {'id': item.id|dechex}) }}" class="btn btn-sm btn-warning"><span
+                                    class="glyphicon glyphicon-edit">e</span></a>
+                        <a href="{{ route_url('pages_rm', {'id': item.id|dechex}) }}" class="btn btn-sm btn-danger"><span
+                                    class="glyphicon glyphicon-remove">d</span></a>
+                    </td>
+                </tr>
+            {% endfor %}
 
-                <p>{{ item.text|striptags|raw|cutStr(500) }}...</p>
+        </table>
 
-                <div class="photos">
-                    {% for image in item.images %}
-                        <a class='images photo-thumb' href="{{ image.uri("origin") }}" title="{{ image.name }} - {{ image.description }}">
-                            <img src="{{ image.uri("thumb") }}" title="{{ image.name }}" alt="{{ image.description }}"/>
-                        </a>
-                    {% endfor %}
-                </div>
-
-                <a href="{{ route_url('pages_edit', {'id': item.id}) }}" class="btn btn-sm btn-warning"><span
-                            class="glyphicon glyphicon-edit"></span></a>
-                <a href="{{ route_url('pages_rm', {'id': item.id}) }}" class="btn btn-sm btn-danger"><span
-                            class="glyphicon glyphicon-remove"></span></a>
-            </div>
-            <br/>
-        {% endfor %}
 
         {#paginator#}
         <div>

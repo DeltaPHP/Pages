@@ -14,6 +14,7 @@ use DeltaDb\Repository;
  * @package Pages
  * @method  setFileManager(\Attach\Model\FileManager $fileManager)
  * @method \Attach\Model\FileManager getFileManager()
+ * @deprecated
  */
 class PagesManager extends Repository
 {

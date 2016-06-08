@@ -5,26 +5,27 @@
 
 namespace Pages\Controller;
 
-use Attach\Model\Parts\AttachSave;
+use Attach\Model\Command\EntityAttachSaveCommand;
+use DeltaPhp\Operator\EntityOperatorInterface;
 use Pages\Model\Page;
 use DeltaCore\AdminControllerInterface;
+use Pages\Model\PageImageRelation;
+use UUID\Model\UuidComplexShortTables;
 
 class AdminController extends IndexController implements AdminControllerInterface
 {
-    use AttachSave;
-
-    public function getFileManager()
-    {
-        return $this->getPagesManager()->getFileManager();
-    }
 
     public function listAction()
     {
-        $manager = $this->getPagesManager();
+        /** @var EntityOperatorInterface $operator */
+        $operator = $this->getOperator();
+
+        $countItems = $operator->count(Page::class);
+
         $itemsPerPage = $this->getConfig(["Pages", "Admin", "itemsPerPage"], 10);
-        $countItems = $manager->count();
         $pageInfo = $this->getPageInfo($countItems, $itemsPerPage);
-        $items = $manager->find([], null, $pageInfo["perPage"], $pageInfo["offsetForPage"], "id");
+
+        $items = $operator->find(Page::class, [], $pageInfo["perPage"], $pageInfo["offsetForPage"], "id");
 
         $this->getView()->assign("items", $items);
         $this->getView()->assignArray($pageInfo);
@@ -36,13 +37,16 @@ class AdminController extends IndexController implements AdminControllerInterfac
     public function formAction(array $params = [])
     {
         if (isset($params["id"])) {
-            $id = $params["id"];
-            $nm = $this->getPagesManager();
-            $item = $nm->findById($id);
+            $id = hexdec($params["id"]);
+            $nm = $this->getOperator();
+            $item = $nm->get(Page::class, $id);
             if (!$item) {
-                throw new \RuntimeException("Bad item id $id");
+                throw new \RuntimeException("Bad item id {$params["id"]}");
             }
             $this->getView()->assign("item", $item);
+        } else {
+            $id = $this->getOperator()->genId(Page::class);
+            $this->getView()->assign("id", $id);
         }
     }
 
@@ -51,29 +55,43 @@ class AdminController extends IndexController implements AdminControllerInterfac
         $this->autoRenderOff();
         //save item
         $request = $this->getRequest();
+        $operator = $this->getOperator();
         $requestParams = $request->getParams();
-        $manager = $this->getPagesManager();
+        if (isset($requestParams["id"])) {
+            $id = $operator->create(UuidComplexShortTables::class, ["value" => $requestParams["id"]]);
+            unset($requestParams["id"]);
+        }
+        
         /** @var Page $item */
-        $item = isset($requestParams["id"]) ? $manager->findById($requestParams["id"]) : $manager->create();
+        $item = $operator->get(Page::class, $id) ?: $operator->create(Page::class);
         if (empty($item)) {
             throw new \LogicException("item not found");
         }
-        $manager->load($item, $requestParams);
-        $manager->save($item);
+        $operator->load($item, $requestParams);
+        $item->setId($id);
+        $operator->save($item);
 
         $maxFileSize = $this->getConfig(["Pages", "Attach", "Size"], 500 * 1024);
-        $this->processFilesRequest($item, $maxFileSize);
+
+        $this->getOperator();
+
+        $fileCommand = new EntityAttachSaveCommand($item, $request, PageImageRelation::class, ["", "maxFileSize" =>$maxFileSize]);
+        $this->getOperator()->execute($fileCommand);
 
         $this->getResponse()->redirect($this->getRouteUrl("pages_list"));
     }
 
     public function rmAction(array $params = [])
     {
-        $this->autoRenderOff();
-        $id = $this->getId();
-        $this->getPagesManager()->deleteById($id);
+        if (isset($params["id"])) {
+            $id = hexdec($params["id"]);
+            $nm = $this->getOperator();
+            $item = $nm->get(Page::class, $id);
+            if (!$item) {
+                throw new \RuntimeException("Bad item id {$params["id"]}");
+            }
+            $this->getOperator()->delete($item);
+        }
         $this->getResponse()->redirect($this->getRouteUrl("pages_list"));
     }
-
-
 }

@@ -6,7 +6,7 @@
     </div>
     <div>
         <div class="page-text">
-            {{ item.text|raw }}
+            {{ item.content|raw }}
         </div>
     </div>
     {% if item.images %}
@@ -14,8 +14,8 @@
             <div class="list">
                 {% for image in item.images %}
                     <div class="thumbnail">
-                        <a class="photo-thumb" href="{{ image.uri("origin") }}">
-                            <img src="{{ image.uri("medium") }}"/>
+                        <a class="photo-thumb" href="{{ image.url("origin") }}">
+                            <img src="{{ image.url("medium") }}"/>
                         </a>
                     </div>
                 {% endfor %}

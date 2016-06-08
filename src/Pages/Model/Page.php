@@ -6,53 +6,62 @@
 namespace Pages\Model;
 
 
-use Attach\Model\Parts\GetImagesTrait;
-use DeltaCore\Prototype\MiddleObject;
+use Attach\Model\Worker\FileWorkerTrait;
 use DeltaDb\EntityInterface;
+use DeltaPhp\Operator\Command\RelationLoadCommand;
+use DeltaPhp\Operator\Entity\TextEntity;
+use DeltaPhp\Operator\Entity\TextEntityInterface;
+use DeltaPhp\Operator\DelegatingInterface;
+use DeltaPhp\Operator\DelegatingTrait;
 
 /**
  * Class Page
  * @package Pages
- * @method  setFileManager(\Attach\Model\FileManager $fileManager)
- * @method \Attach\Model\FileManager getFileManager()
  */
-class Page extends MiddleObject implements EntityInterface
+class Page extends TextEntity implements TextEntityInterface, EntityInterface, DelegatingInterface
 {
-    use GetImagesTrait;
+    use DelegatingTrait;
 
-    protected $title;
-    protected $text;
-
-    /**
-     * @return mixed
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * @param mixed $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
+    protected $url;
+    protected $images;
 
     /**
      * @return mixed
      */
-    public function getText()
+    public function getUrl()
     {
-        return $this->text;
+        return $this->url;
     }
 
     /**
-     * @param mixed $text
+     * @param mixed $url
      */
-    public function setText($text)
+    public function setUrl($url)
     {
-        $this->text = $text;
+        $this->url = $url;
     }
 
+    public function isUntrusted()
+    {
+        // TODO: Implement isUntrusted() method.
+    }
+
+    public function setUntrusted($untrusted = true)
+    {
+        // TODO: Implement setUntrusted() method.
+    }
+
+    public function getFieldsList()
+    {
+        // TODO: Implement getFieldsList() method.
+    }
+
+    public function getImages()
+    {
+        if (null === $this->images) {
+            $command = new RelationLoadCommand(PageImageRelation::class, $this);
+            $this->images = $this->delegate($command);
+        }
+        return $this->images;
+    }
 }

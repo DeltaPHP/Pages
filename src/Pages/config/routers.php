@@ -6,7 +6,7 @@ return [
             "methods" => [\DeltaRouter\Route::METHOD_GET],
             "patterns" => [
                 "type" => \DeltaRouter\RoutePattern::TYPE_REGEXP,
-                "value" => "^/pages/(?P<name>\w+)$",
+                "value" => "^/pages/(?P<url>\w+)$",
             ],
             "action" => ["index", "view"],
         ],
