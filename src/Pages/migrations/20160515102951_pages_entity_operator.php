@@ -2,7 +2,7 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class PagesDeltaPhp\Operator extends AbstractMigration
+class PagesEntityOperator extends AbstractMigration
 {
     /**
      * Change Method.
