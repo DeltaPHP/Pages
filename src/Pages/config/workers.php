@@ -8,11 +8,9 @@ use \DeltaPhp\Operator\Command\RelationLoadCommand;
 return [
     "PageWorker" => [
         function ($s) {
-            $w = new \DeltaPhp\Operator\Worker\PostgresWorker();
+            $w = new \Pages\Model\PageWorker();
             $adapter = $s->getOperator()->getDependency("dbAdapter");
             $w->setAdapter($adapter);
-            $w->setTable("pages");
-            $w->addFields(["title", "description", "content", "url"]);
             return $w;
         },
         WorkerInterface::PARAM_TABLEID => 12,
@@ -25,6 +23,7 @@ return [
             CommandInterface::COMMAND_LOAD => Page::class,
             CommandInterface::COMMAND_RESERVE => Page::class,
             CommandInterface::COMMAND_GENERATE_ID => Page::class,
+            \DeltaPhp\Operator\Worker\TranslatorObjectToDataWorker::COMMAND_BEFORE_DELETE => [Page::class => -10],
         ],
     ],
 
