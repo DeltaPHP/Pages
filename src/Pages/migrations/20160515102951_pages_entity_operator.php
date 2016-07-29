@@ -31,7 +31,7 @@ SQL;
         $sql = "CREATE SEQUENCE uuid_complex_short_tables_11";
         $this->execute($sql);
 
-        $sql = "insert into pages (id, created, changed, active, title, description, content, url) select  uuid_short_complex_tables(11), created, changed, true, title, description, text, `name` from pages_old;";
+        $sql = "insert into pages (id, created, changed, active, title, description, content, url) select  uuid_short_complex_tables(11), created, changed, true, title, description, \"text\", \"name\" from pages_old";
 
         $this->execute($sql);
     }
