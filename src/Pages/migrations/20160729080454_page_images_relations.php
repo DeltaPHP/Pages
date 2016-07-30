@@ -17,8 +17,11 @@ CREATE TABLE page_images_relations
       REFERENCES images (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
-INHERITS (public.relations);
+INHERITS (relations);
 SQL;
+        $this->execute($sql);
+
+        $sql = "CREATE SEQUENCE uuid_complex_short_tables_101";
         $this->execute($sql);
     }
 }
