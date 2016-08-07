@@ -9,8 +9,8 @@ namespace Pages\Model;
 use Attach\Model\Worker\FileWorkerTrait;
 use DeltaDb\EntityInterface;
 use DeltaPhp\Operator\Command\RelationLoadCommand;
-use DeltaPhp\Operator\Entity\TextEntity;
-use DeltaPhp\Operator\Entity\TextEntityInterface;
+use DeltaPhp\Operator\Entity\ContentEntity;
+use DeltaPhp\Operator\Entity\ContentEntityInterface;
 use DeltaPhp\Operator\DelegatingInterface;
 use DeltaPhp\Operator\DelegatingTrait;
 
@@ -18,7 +18,7 @@ use DeltaPhp\Operator\DelegatingTrait;
  * Class Page
  * @package Pages
  */
-class Page extends TextEntity implements TextEntityInterface, EntityInterface, DelegatingInterface
+class Page extends ContentEntity implements ContentEntityInterface, EntityInterface, DelegatingInterface
 {
     use DelegatingTrait;
 
