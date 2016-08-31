@@ -24,6 +24,7 @@ return [
             CommandInterface::COMMAND_RESERVE => Page::class,
             CommandInterface::COMMAND_GENERATE_ID => Page::class,
             \DeltaPhp\Operator\Worker\TranslatorObjectToDataWorker::COMMAND_BEFORE_DELETE => [Page::class => -10],
+            CommandInterface::COMMAND_WORKER_INFO => Page::class,
         ],
     ],
 
@@ -46,6 +47,7 @@ return [
             CommandInterface::COMMAND_SAVE => PageImageRelation::class,
             CommandInterface::COMMAND_DELETE => PageImageRelation::class,
             \DeltaPhp\Operator\Command\RelationParamsCommand::COMMAND_RELATION_PARAMS => PageImageRelation::class,
+            CommandInterface::COMMAND_WORKER_INFO => PageImageRelation::class,
         ],
     ],
 ];
