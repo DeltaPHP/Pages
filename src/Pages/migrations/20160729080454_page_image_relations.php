@@ -2,12 +2,12 @@
 
 use Phinx\Migration\AbstractMigration;
 
-class PageImagesRelations extends AbstractMigration
+class PageImageRelations extends AbstractMigration
 {
     public function up()
     {
         $sql = <<<SQL
-CREATE TABLE page_images_relations
+CREATE TABLE page_image_relations
 (
   CONSTRAINT page_files_relations_pkey PRIMARY KEY (id),
   CONSTRAINT page_files_relations_first_fkey FOREIGN KEY (first)

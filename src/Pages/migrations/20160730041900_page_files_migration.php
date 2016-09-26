@@ -3,6 +3,8 @@
 use Phinx\Migration\AbstractMigration;
 use DeltaCore\Application;
 use DeltaPhp\Operator\Command\GenerateIdCommand;
+use Attach\Model\ImageFileEntity;
+use Pages\Model\PageImageRelation;
 
 class PageFilesMigration extends AbstractMigration
 {
@@ -49,13 +51,13 @@ class PageFilesMigration extends AbstractMigration
         foreach ($files as $fileData) {
             $page = $operator->find(\Pages\Model\Page::class, ["old_id" => $fileData["object"]])->firstOrFail();
             /** @var \Attach\Model\FileEntity $fileObject */
-            $fileObject = $operator->create(\Attach\Model\ImageFile::class);
-            $fileData["id"] = $getUuidFunction(\Attach\Model\ImageFile::class);
+            $fileObject = $operator->create(ImageFileEntity::class);
+            $fileData["id"] = $getUuidFunction(ImageFileEntity::class);
             $operator->load($fileObject, $fileData);
             $operator->save($fileObject);
 
-            $relation = $operator->create(\Pages\Model\PageImageRelation::class);
-            $relation->setId($getUuidFunction(\Pages\Model\PageImageRelation::class));
+            $relation = $operator->create(PageImageRelation::class);
+            $relation->setId($getUuidFunction(PageImageRelation::class));
             $relation->setFirst($page);
             $relation->setSecond($fileObject);
             $operator->save($relation);

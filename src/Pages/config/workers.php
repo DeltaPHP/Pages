@@ -1,9 +1,10 @@
 <?php
 use Pages\Model\Page;
 use DeltaPhp\Operator\Command\CommandInterface;
-use \DeltaPhp\Operator\Worker\WorkerInterface;
-use \Pages\Model\PageImageRelation;
-use \DeltaPhp\Operator\Command\RelationLoadCommand;
+use DeltaPhp\Operator\Worker\WorkerInterface;
+use Pages\Model\PageImageRelation;
+use DeltaPhp\Operator\Command\RelationLoadCommand;
+use Attach\Model\ImageFileEntity;
 
 return [
     "PageWorker" => [
@@ -30,7 +31,7 @@ return [
 
     "PageFilesWorker" => [
         function ($s) {
-            $worker = new \DeltaPhp\Operator\Worker\RelationsWorker(Page::class, \Attach\Model\ImageFile::class, PageImageRelation::class, "page_images_relations");
+            $worker = new \DeltaPhp\Operator\Worker\RelationsWorker(Page::class, ImageFileEntity::class, PageImageRelation::class, "page_image_relations");
             $adapter = $s->getOperator()->getDependency("dbAdapter");
             $worker->setAdapter($adapter);
             return $worker;
