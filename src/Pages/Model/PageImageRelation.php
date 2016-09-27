@@ -4,10 +4,10 @@
 namespace Pages\Model;
 
 
+use Attach\Model\EntityImageRelation;
 use Attach\Model\FileEntity;
-use DeltaPhp\Operator\Entity\RelationEntity;
 
-class PageImageRelation extends RelationEntity
+class PageImageRelation extends EntityImageRelation
 {
     public function __construct()
     {
