@@ -17,7 +17,7 @@ CREATE TABLE page_image_relations
       REFERENCES images (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 )
-INHERITS (relations);
+INHERITS (entity_images_relation);
 SQL;
         $this->execute($sql);
 
