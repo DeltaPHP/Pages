@@ -24,7 +24,7 @@ return [
             CommandInterface::COMMAND_LOAD => Page::class,
             CommandInterface::COMMAND_RESERVE => Page::class,
             CommandInterface::COMMAND_GENERATE_ID => Page::class,
-            \DeltaPhp\Operator\Worker\TranslatorObjectToDataWorker::COMMAND_BEFORE_DELETE => [Page::class => -10],
+            \DeltaPhp\Operator\Command\PreCommandInterface::PREFIX_COMMAND_PRE . CommandInterface::COMMAND_DELETE => [Page::class => -10],
             CommandInterface::COMMAND_WORKER_INFO => Page::class,
         ],
     ],

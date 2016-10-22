@@ -23,7 +23,7 @@ class PageWorker extends PostgresWorker implements DelegatingInterface
         $this->addFields(["title", "description", "content", "url"]);
     }
 
-    public function deleteFiles(EntityInterface $entity)
+    public function deleteImages(EntityInterface $entity)
     {
         //удалить файлы
         $command = new FindCommand(PageImageRelation::class, null, null, null, null, ["entity" => $entity]);
@@ -40,7 +40,7 @@ class PageWorker extends PostgresWorker implements DelegatingInterface
         switch ($command->getName()) {
             case PreCommandInterface::PREFIX_COMMAND_PRE . CommandInterface::COMMAND_DELETE:
                 $entity = $command->getParams("entity");
-                return $this->deleteFiles($entity);
+                return $this->deleteImages($entity);
             default:
                 return parent::execute($command);
         }

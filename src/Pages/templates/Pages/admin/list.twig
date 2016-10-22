@@ -42,14 +42,14 @@
         <div>
             <ul class="pagination">
                 {% if showFirstPage %}
-                    <li><a href="/admin/articles">&laquo;</a></li>
+                    <li><a href="/admin/pages">&laquo;</a></li>
                 {% endif %}
                 {% for page in pages %}
                     <li class="{% if page.active %}active{% endif %}"><a
-                                href="/admin/articles?p={{ page.id }}">{{ page.id }}</a></li>
+                                href="/admin/pages?p={{ page.id }}">{{ page.id }}</a></li>
                 {% endfor %}
                 {% if showLastPage %}
-                    <li><a href="/admin/articles?p={{ countPages }}">&raquo;</a></li>
+                    <li><a href="/admin/pages?p={{ countPages }}">&raquo;</a></li>
                 {% endif %}
             </ul>
         </div>

@@ -54,12 +54,14 @@ class PageFilesMigration extends AbstractMigration
             $fileObject = $operator->create(ImageFileEntity::class);
             $fileData["id"] = $getUuidFunction(ImageFileEntity::class);
             $operator->load($fileObject, $fileData);
+            usleep(mt_rand(0, 1000000));
             $operator->save($fileObject);
 
             $relation = $operator->create(PageImageRelation::class);
             $relation->setId($getUuidFunction(PageImageRelation::class));
             $relation->setFirst($page);
             $relation->setSecond($fileObject);
+            usleep(mt_rand(0, 1000000));
             $operator->save($relation);
         }
     }
